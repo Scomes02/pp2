@@ -1,0 +1,121 @@
+body {
+    background-image: radial-gradient(circle at 50% -20.71%, #b72f0d 0, #bd3b3b 12.5%, #d54c4c 25%, #e76f6f 37.5%, #e7a8a8 50%, #f4b1b1 62.5%, #f7c6c6 75%, #f8dada 87.5%, #f9e6e6 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+* {
+    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'PT Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+form {
+    width: 400px; /* Más pequeño que antes */
+    border: 2px solid #b72f0d; /* Rojo oscuro */
+    padding: 2rem; /* Menos padding */
+    background-color: #fef2f2; /* Blanco con un toque de rojo */
+    border-radius: 15px; /* Bordes menos redondeados */
+    color: #b72f0d; /* Rojo oscuro */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos verticalmente */
+    align-items: center; /* Centra los elementos dentro del formulario */
+}
+
+h1 {
+    border: 2px solid #b72f0d; /* Rojo oscuro */
+    width: 100%; /* Se adapta al ancho del formulario */
+    padding: 10px;
+    margin-bottom: 20px; /* Espacio más ajustado */
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fbe4e4; /* Rosa claro */
+    color: #b72f0d; /* Rojo oscuro */
+}
+
+label {
+    color: #b72f0d; /* Rojo oscuro */
+    font-size: 16px; /* Tamaño más pequeño */
+    padding-bottom: 5px; /* Espacio entre el label y el input */
+    font-weight: 500;
+    width: 100%; /* Alinea los labels con los inputs */
+}
+
+input {
+    display: block;
+    border: 2px solid #b72f0d; /* Rojo oscuro */
+    color: #b72f0d; /* Rojo oscuro */
+    width: 100%; /* Ajusta al ancho del formulario */
+    padding: 8px; /* Menos padding */
+    margin-bottom: 15px; /* Espacio más ajustado */
+    border-radius: 8px; /* Menos redondeado */
+    background-color: #fbe4e4; /* Rosa claro */
+}
+
+button {
+    background-color: #b72f0d; /* Rojo oscuro */
+    padding: 0.5rem 1rem; /* Ajusta el tamaño */
+    color: #ffffff; /* Blanco */
+    border: none;
+    width: auto; /* Botón ajustado al contenido */
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9f1010; /* Rojo más oscuro */
+}
+
+a.button {
+    background-color: #b72f0d; /* Rojo oscuro */
+    padding: 0.5rem 1rem; /* Ajusta el tamaño */
+    color: #ffffff; /* Blanco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Quita el subrayado */
+    font-size: 0.75rem;
+}
+
+a.button:hover {
+    background-color: #9f1010; /* Rojo más oscuro */
+}
+
+.error {
+    background-color: #d54c4c; /* Rojo intenso */
+    color: #ffffff; /* Blanco */
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: center; /* Ajusta el espacio entre los checkboxes */
+    width: 100%;
+    flex-wrap: wrap; /* Permite que los checkboxes se ajusten si no caben en una fila */
+}
+
+.checkbox-group label {
+    margin-right: 10px; /* Espacio entre los checkboxes */
+    width: auto; /* El tamaño de cada label se ajusta al contenido */
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px; /* Espacio entre el checkbox y el label */
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+    form {
+        width: 90%; /* Se adapta al ancho de la pantalla */
+    }
+}

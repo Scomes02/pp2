@@ -1,0 +1,191 @@
+html, body {
+    height: 100%; /* Hace que el body y el HTML tengan una altura de 100% */
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', sans-serif;
+    background-image: url('../img/fondoPoke.jpg'); /* Asegúrate de colocar la ruta correcta */
+    background-size: cover; /* Hace que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    display: flex; /* Usa flexbox en el body */
+    flex-direction: column; /* Organiza los elementos verticalmente */
+}
+
+header {
+    background: #9f1010e3;
+    color: blanchedalmond;
+    padding: 0 20px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo img {
+    max-height: 80%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+.titulo {
+    color: blanchedalmond;
+}
+
+.h2{
+    justify-content: center;
+}
+.contenedor-formulario {
+    background-color: #e2e2e2ab;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.button {
+    display: inline-block; /* Asegura que el enlace se comporte como un botón */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #ffffff00; /* Color de fondo del botón */
+    color: #0407cf; /* Color del texto */
+    border-radius: 4px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.button:hover {
+    background-color: #c27c7c; /* Color al pasar el mouse */
+}
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre los contenedores de botones */
+    align-items: center; /* Alinea los elementos al centro de la fila */
+}
+
+.boton-contenedor {
+    display: flex; /* Flexbox para apilar elementos verticalmente */
+    flex-direction: column; /* Apila la imagen y el botón verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; /* Alinea el contenido centrado */
+}
+
+.imagen-boton {
+    max-width: 80%;
+    height: 80px; /* Ajusta la altura de las imágenes a un valor uniforme */
+    margin-bottom: 10px; /* Espacio entre la imagen y el botón */
+}
+
+.styled-button {
+    background-color: #ad4646;
+    color: #ffffff;
+    padding: .5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem; /* Tamaño de fuente uniforme para los botones */
+    text-decoration: none;
+}
+
+.styled-button:hover {
+    background-color: #9f1010;
+}
+
+main {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+    padding: 20px;
+}
+footer {
+    background-color: #9f1010e3; /* Color de fondo */
+    height: 100px; /* Ajusta la altura como desees */
+    overflow: hidden;
+    position: relative;
+}
+
+.pikachu {
+    position: absolute;
+    bottom: 0; /* Posiciona Pikachu al fondo del footer */
+    animation: correr-pikachu 5s linear infinite; /* Animación de 5 segundos, lineal y repetida infinitamente */
+    width: 100px;
+    left: -140px;
+}
+.baulbasaur {
+    position: absolute;
+    bottom: 0; /* Posiciona Pikachu al fondo del footer */
+    animation: correr-baulbasaur 5s linear infinite; /* Animación de 5 segundos, lineal y repetida infinitamente */
+    width: 180px;
+    animation-delay: 1s;
+    left: -140px;
+}
+.squirtle {
+    position: absolute;
+    bottom: 0; /* Posiciona Pikachu al fondo del footer */
+    animation: correr-squirtle 5s linear infinite; /* Animación de 5 segundos, lineal y repetida infinitamente */
+    width: 100px;
+    animation-delay: 2s;
+    left: -140px;
+}
+.charmander {
+    position: absolute;
+    bottom: 0; /* Posiciona Pikachu al fondo del footer */
+    animation: correr-charmander 5s linear infinite; /* Animación de 5 segundos, lineal y repetida infinitamente */
+    width: 180px;
+    animation-delay: 3s;
+    left: -140px;
+}
+.poke {
+    position: absolute;
+    bottom: 0; /* Posiciona Pikachu al fondo del footer */
+    animation: correr-charmander 5s linear infinite; /* Animación de 5 segundos, lineal y repetida infinitamente */
+    width: 80px;
+    animation-delay: 4s;
+    left: -140px;
+}
+
+
+@keyframes correr-baulbasaur {
+    0% {
+        left: -100px; /* Comienza fuera del lado izquierdo del footer */
+    }
+    100% {
+        left: 100%; /* Termina fuera del lado derecho del footer */
+    }
+}
+
+@keyframes correr-squirtle {
+    0% {
+        left: -100px; /* Comienza en la misma posición */
+    }
+    100% {
+        left: 100%; /* Termina un poco antes que Pikachu */
+    }
+}
+@keyframes correr-pikachu {
+    0% {
+        left: -100px; /* Comienza fuera del lado izquierdo del footer */
+    }
+    100% {
+        left: 100%; /* Termina fuera del lado derecho del footer */
+    }
+}
+@keyframes correr-charmander {
+    0% {
+        left: -100px; /* Comienza en la misma posición */
+    }
+    100% {
+        left: 100%; /* Termina un poco antes que Pikachu */
+    }
+}
+@keyframes correr-poke {
+    0% {
+        left: -100px; /* Comienza fuera del lado izquierdo del footer */
+    }
+    100% {
+        left: 100%; /* Termina fuera del lado derecho del footer */
+    }
+}
