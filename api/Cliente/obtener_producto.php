@@ -1,26 +1,23 @@
 <?php
-require_once("../catalogo-conexion/Conexion.php");
+require_once("../../catalogo-conexion/Conexion.php");
 
 // Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+if ($conexion->connect_error) {
+    die("Conexión fallida: " . $conexion->connect_error);
 }
 
 $sql = "SELECT * FROM productos";
-$result = $conn->query($sql);
+$result = $conexion->query($sql);
 
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo '<div class="product">';
-        echo '<img src="guantes.jpg" alt="' . $row['nombre'] . '">';
-        echo '<p>' . $row['nombre'] . '</p>';
-        echo '<p class="product-price">$' . $row['precio'] . ' ' . ($row['off'] ? '<s>$' . ($row['precio'] * (1 - $row['off'] / 100)) . '</s>' : '') . '</p>';
-        echo '<span>' . ($row["off"] ? 'OFF' . $row["off"] . '%' : '') . '</span>';
-        echo '</div>';
+    while ($row = $result->fetch_assoc()) {
+        echo '<p class="product-price">$' . $row['precio_unitario'] . '</p>';
+        if ($row["descuento"]) {
+            echo '<s>$' . ($row['precio_unitario'] * (1 - $row['descuento'] / 100)) . '</s>';
+        }
     }
 } else {
     echo "<p>0 productos encontrados</p>";
 }
 
 $conn->close();
-?>

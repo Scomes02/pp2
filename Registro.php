@@ -1,29 +1,28 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Conexión a la base de datos
-    require_once '../catalogo-conexion/Conexion.php';
+    require_once 'catalogo-conexion/Conexion.php';
     $conn = $conexion;
 
     if ($conn->connect_error) {
         die(json_encode(['status' => 'error', 'message' => 'Error de conexión a la base de datos.']));
     }
 
-    // Sanitizar y capturar datos
+    // Capturar y sanitizar
     $tipo = $_POST['tipo'] ?? null;
-    $nombre_completo = trim($_POST['nombre_completo'] ?? '');
+    $nombre = trim($_POST['nombre_completo'] ?? '');
     $telefono = trim($_POST['telefono'] ?? '');
     $direccion = trim($_POST['direccion'] ?? '');
     $dni_cuit = trim($_POST['dni_cuit'] ?? '');
-    $correo = filter_var(trim($_POST['correo'] ?? ''), FILTER_VALIDATE_EMAIL);
+    $email = filter_var(trim($_POST['correo'] ?? ''), FILTER_VALIDATE_EMAIL);
     $clave = $_POST['clave'] ?? '';
     $rclave = $_POST['rclave'] ?? '';
 
     // Validaciones
-    if (!$tipo || ($tipo !== 'Cliente' && $tipo !== 'Comercio')) {
-        echo json_encode(['status' => 'error', 'message' => 'Seleccione un tipo válido (Cliente o Comercio).']);
+    if (!$tipo || !in_array($tipo, ['Cliente', 'Comercio'])) {
+        echo json_encode(['status' => 'error', 'message' => 'Tipo de usuario inválido.']);
         exit;
     }
-    if (!$nombre_completo || !$telefono || !$direccion || !$dni_cuit || !$correo || !$clave || !$rclave) {
+    if (!$nombre || !$telefono || !$direccion || !$dni_cuit || !$email || !$clave || !$rclave) {
         echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios.']);
         exit;
     }
@@ -32,34 +31,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Encriptar la clave
-    $clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+    // Verificar si ya existe email o dni_cuit
+    $verifica_sql = "SELECT id_usuario FROM usuarios WHERE email = ? OR dni_cuit = ?";
+    $verifica_stmt = $conn->prepare($verifica_sql);
+    $verifica_stmt->bind_param("ss", $email, $dni_cuit);
+    $verifica_stmt->execute();
+    $verifica_stmt->store_result();
+    if ($verifica_stmt->num_rows > 0) {
+        echo json_encode(['status' => 'error', 'message' => 'El correo o DNI/CUIT ya están registrados.']);
+        exit;
+    }
+    $verifica_stmt->close();
 
-    // Determinar la tabla y los campos según el tipo
-    $tabla = $tipo === 'Cliente' ? 'clientes' : 'comercios';
-    $nombre_campo = $tipo === 'Cliente' ? 'nombre_cliente' : 'nombre_comercio';
+    // Encriptar clave
+    $password_hash = password_hash($clave, PASSWORD_DEFAULT);
+    $tipo_usuario = strtolower($tipo); // cliente o comercio
 
-    // Preparar la consulta
-    $sql = "INSERT INTO $tabla ($nombre_campo, telefono, direccion, dni_cuit, correo, clave) 
-            VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
+    // Insertar en usuarios
+    $insert_usuario = "INSERT INTO usuarios (nombre, telefono, direccion, email, dni_cuit, password_hash, tipo_usuario) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_usuario);
     if (!$stmt) {
-        echo json_encode(['status' => 'error', 'message' => 'Error al preparar la consulta.']);
+        echo json_encode(['status' => 'error', 'message' => 'Error preparando consulta usuarios.']);
+        exit;
+    }
+    $stmt->bind_param("sssssss", $nombre, $telefono, $direccion, $email, $dni_cuit, $password_hash, $tipo_usuario);
+    if (!$stmt->execute()) {
+        echo json_encode(['status' => 'error', 'message' => 'Error al registrar usuario: ' . $stmt->error]);
+        exit;
+    }
+    $id_usuario = $stmt->insert_id;
+    $stmt->close();
+
+    // Insertar en cliente o comercio
+    if ($tipo_usuario === 'cliente') {
+        $sql_sub = "INSERT INTO clientes (id_usuario) VALUES (?)";
+    } else {
+        $sql_sub = "INSERT INTO comercios (id_usuario) VALUES (?)";
+    }
+
+    $stmt_sub = $conn->prepare($sql_sub);
+    $stmt_sub->bind_param("i", $id_usuario);
+    if (!$stmt_sub->execute()) {
+        echo json_encode(['status' => 'error', 'message' => 'Error al crear registro secundario: ' . $stmt_sub->error]);
         exit;
     }
 
-    $stmt->bind_param('ssssss', $nombre_completo, $telefono, $direccion, $dni_cuit, $correo, $clave_hash);
-
-    // Ejecutar e informar del resultado
-    if ($stmt->execute()) {
-        header("Location: Index.php?success=registro");
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error al registrar el usuario: ' . $stmt->error]);
-    }
-
-    $stmt->close();
+    $stmt_sub->close();
     $conn->close();
+
+    // Redirigir con éxito
+    header("Location: Index.php?success=registro");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -68,9 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/img/poke-icono.ico">
+    <link rel="icon" href="assets/img/poke-icono.ico">
     <title>Registro - RocketApp</title>
-    <link rel="stylesheet" href="../assets/css/style2.css">
+    <link rel="stylesheet" href="assets/css/style2.css">
     <script src="https://kit.fontawesome.com/8fa0212ec6.js" crossorigin="anonymous"></script>
 </head>
 
