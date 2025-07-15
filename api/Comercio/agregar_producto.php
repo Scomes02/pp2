@@ -2,7 +2,7 @@
 session_start();
 
 require_once("../../catalogo-conexion/Conexion.php");
-
+ 
 if (!isset($_SESSION['id_comercio'])) {
     echo json_encode(["status" => "error", "message" => "No se ha iniciado sesión como comercio."]);
     exit;

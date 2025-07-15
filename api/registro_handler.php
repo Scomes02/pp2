@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
         die(json_encode(['status' => 'error', 'message' => 'Error de conexión a la base de datos.']));  // Mejora en la respuesta
     }
-
+ 
     // Capturar los datos del formulario
     $tipo = $_POST['tipo'] ?? null;
     $usuario = $_POST['Usuario'] ?? '';

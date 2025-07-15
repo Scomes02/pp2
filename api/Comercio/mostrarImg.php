@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
             echo "<p>Descuento: " . htmlspecialchars($row['descuento']) . "%</p>";
         }
         echo "</div>";
-    }
+    } 
 } else {
     echo "<p>No hay productos cargados para este comercio.</p>";
 }

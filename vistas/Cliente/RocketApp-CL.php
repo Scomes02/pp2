@@ -10,7 +10,7 @@ $tipo_usuario = $_SESSION['id_cliente'];
 require_once("../../catalogo-conexion/Conexion.php");
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
-}
+} 
 ?>
 <!DOCTYPE html>
 <html lang="es">

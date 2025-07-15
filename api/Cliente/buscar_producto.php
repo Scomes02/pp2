@@ -1,6 +1,6 @@
 <?php
 require_once("../../catalogo-conexion/Conexion.php");
-
+ 
 // Verificar conexión
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);

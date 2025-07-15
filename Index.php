@@ -21,7 +21,7 @@ session_start();
         <div class="titulo">
             <h1>Bienvenido a Rocket App</h1>
         </div>
-    </header>
+    </header> 
     <main>
         <section class="contenedor-formulario">
             <h2>¿Quién eres?</h2>

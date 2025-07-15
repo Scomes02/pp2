@@ -100,3 +100,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Cerrar conexión
 $conexion->close();
 ?>
+ 

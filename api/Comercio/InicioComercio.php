@@ -12,7 +12,7 @@
     <title>ROCKET APP - Inicio de Sesión</title>
     <link rel="stylesheet" href="../../assets/css/style2.css">
 </head>
-
+ 
 <body>
     <form action="procesar_inicio_sesion.php" method="post">
         <h1>Inicio Sesión</h1>

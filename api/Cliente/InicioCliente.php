@@ -15,7 +15,7 @@
 <body>
     <form action="../Comercio/procesar_inicio_sesion.php" method="post">
         <h1>Inicio Sesión</h1>
-        <br>
+        <br>//**/ */
         <label for="nombre_cliente">
             <i class="fa-solid fa-user"></i> Nombre del usuario
         </label>

@@ -6,7 +6,7 @@ if (!isset($_SESSION['id_comercio'])) {
     echo json_encode(["status" => "error", "message" => "No tienes permiso para ver productos."]);
     exit;
 }
-
+ 
 $id_comercio = $_SESSION['id_comercio'];
 
 require_once("../../catalogo-conexion/Conexion.php");

@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_sub = "INSERT INTO clientes (id_usuario) VALUES (?)";
     } else {
         $sql_sub = "INSERT INTO comercios (id_usuario) VALUES (?)";
-    }
+    } 
 
     $stmt_sub = $conn->prepare($sql_sub);
     $stmt_sub->bind_param("i", $id_usuario);

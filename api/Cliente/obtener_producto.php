@@ -5,7 +5,7 @@ require_once("../../catalogo-conexion/Conexion.php");
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
-
+ 
 $sql = "SELECT * FROM productos";
 $result = $conexion->query($sql);
 

@@ -50,5 +50,5 @@ if (isset($_GET['id'])) {
 } else {
     echo json_encode(["status" => "error", "message" => "ID de producto no proporcionado."]);
 }
-
+ 
 $conexion->close();

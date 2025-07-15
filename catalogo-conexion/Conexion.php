@@ -9,6 +9,6 @@ $conexion = new mysqli($host, $usuario, $contrasena, $base_datos, $puerto);
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
-}
+} 
 ?>
 

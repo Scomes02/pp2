@@ -118,7 +118,7 @@ if ($stmt) {
                     if (data.status === "success") {
                         let container = document.getElementById("products-container");
                         container.innerHTML = "";
-
+ 
                         data.products.forEach(product => {
                             const div = document.createElement("div");
                             div.classList.add("product-block");
